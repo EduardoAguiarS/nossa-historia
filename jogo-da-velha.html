@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo da Velha do Amor | Nicaele & Eduardo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pink-dark: #e84393;
+            --pink-light: #fd79a8;
+            --purple: #6c5ce7;
+            --white: #fff;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), 
+                        url('https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .game-container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+            background-color: var(--white);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+        }
+        
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            color: var(--pink-dark);
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+        
+        .start-screen {
+            margin: 20px 0;
+        }
+        
+        .start-options {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .start-option {
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        #start-eduardo {
+            background-color: var(--purple);
+            color: white;
+        }
+        
+        #start-nicaele {
+            background-color: var(--pink-dark);
+            color: white;
+        }
+        
+        .start-option:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow);
+        }
+        
+        .players {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+            display: none; /* Inicialmente escondido */
+        }
+        
+        .player {
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .player.active {
+            transform: scale(1.05);
+            box-shadow: var(--shadow);
+        }
+        
+        #player1 {
+            background-color: var(--purple);
+            color: white;
+        }
+        
+        #player2 {
+            background-color: var(--pink-dark);
+            color: white;
+        }
+        
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 30px auto;
+            max-width: 300px;
+            display: none; /* Inicialmente escondido */
+        }
+        
+        .cell {
+            height: 90px;
+            background-color: var(--white);
+            border: 2px solid var(--pink-light);
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 3rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .cell:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow);
+        }
+        
+        .cell.x {
+            color: var(--purple);
+        }
+        
+        .cell.o {
+            color: var(--pink-dark);
+        }
+        
+        #game-message {
+            min-height: 60px;
+            margin: 20px 0;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        
+        .action-buttons {
+            display: none; /* Inicialmente escondido */
+        }
+        
+        .restart-button {
+            padding: 12px 30px;
+            background: var(--pink-dark);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin: 10px 5px;
+            transition: all 0.3s;
+        }
+        
+        .restart-button:hover {
+            transform: scale(1.05);
+        }
+        
+        .back-button {
+            padding: 10px 25px;
+            background: var(--purple);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin: 10px 5px;
+            transition: all 0.3s;
+        }
+        
+        .back-button:hover {
+            transform: scale(1.05);
+        }
+        
+        .celebration {
+            font-size: 4rem;
+            animation: bounce 1s infinite;
+            margin: 20px 0;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .cell {
+                height: 80px;
+                font-size: 2.5rem;
+            }
+            
+            .start-options {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>Jogo da Velha do Amor</h1>
+        <p>Eduardo ❌ vs Nicaele ⭕</p>
+        
+        <!-- Tela de início -->
+        <div class="start-screen" id="start-screen">
+            <h2>Quem vai começar?</h2>
+            <div class="start-options">
+                <div class="start-option" id="start-eduardo">Eduardo (❌)</div>
+                <div class="start-option" id="start-nicaele">Nicaele (⭕)</div>
+            </div>
+        </div>
+        
+        <!-- Elementos do jogo (inicialmente ocultos) -->
+        <div class="players" id="players">
+            <div class="player active" id="player1">Eduardo (❌)</div>
+            <div class="player" id="player2">Nicaele (⭕)</div>
+        </div>
+        
+        <div class="game-board" id="game-board">
+            <!-- Células serão adicionadas via JavaScript -->
+        </div>
+        
+        <div id="game-message"></div>
+        
+        <div class="action-buttons" id="action-buttons">
+            <button class="restart-button" id="restart-button">Jogar Novamente</button>
+            <button class="back-button" onclick="window.location.href='index.html'">
+                Voltar ao Site
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elementos do jogo
+            const startScreen = document.getElementById('start-screen');
+            const playersDisplay = document.getElementById('players');
+            const gameBoard = document.getElementById('game-board');
+            const gameMessage = document.getElementById('game-message');
+            const actionButtons = document.getElementById('action-buttons');
+            const startEduardo = document.getElementById('start-eduardo');
+            const startNicaele = document.getElementById('start-nicaele');
+            const restartButton = document.getElementById('restart-button');
+            
+            // Variáveis do jogo
+            let currentPlayer = 'X'; // X = Eduardo, O = Nicaele
+            let board = ['', '', '', '', '', '', '', '', ''];
+            let gameActive = true;
+            
+            // Combinações vencedoras
+            const winningConditions = [
+                [0, 1, 2], [3, 4, 5], [6, 7, 8], // linhas
+                [0, 3, 6], [1, 4, 7], [2, 5, 8], // colunas
+                [0, 4, 8], [2, 4, 6]             // diagonais
+            ];
+            
+            // Inicia o jogo
+            function initGame(startingPlayer) {
+                // Esconde tela inicial e mostra elementos do jogo
+                startScreen.style.display = 'none';
+                playersDisplay.style.display = 'flex';
+                gameBoard.style.display = 'grid';
+                actionButtons.style.display = 'block';
+                
+                // Define o jogador inicial
+                currentPlayer = startingPlayer;
+                updatePlayerDisplay();
+                gameMessage.textContent = `Vez do ${currentPlayer === 'X' ? 'Eduardo' : 'Nicaele'}!`;
+                
+                // Cria as células do tabuleiro
+                gameBoard.innerHTML = '';
+                for (let i = 0; i < 9; i++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'cell';
+                    cell.dataset.index = i;
+                    cell.addEventListener('click', handleCellClick);
+                    gameBoard.appendChild(cell);
+                }
+                
+                // Reseta variáveis
+                board = ['', '', '', '', '', '', '', '', ''];
+                gameActive = true;
+            }
+            
+            // Atualiza a exibição do jogador atual
+            function updatePlayerDisplay() {
+                document.getElementById('player1').classList.toggle('active', currentPlayer === 'X');
+                document.getElementById('player2').classList.toggle('active', currentPlayer === 'O');
+            }
+            
+            // Manipula clique na célula
+            function handleCellClick(e) {
+                const cell = e.target;
+                const cellIndex = parseInt(cell.dataset.index);
+                
+                // Verifica se a célula está vazia e se o jogo está ativo
+                if (board[cellIndex] !== '' || !gameActive) return;
+                
+                // Atualiza o tabuleiro e a exibição
+                board[cellIndex] = currentPlayer;
+                cell.textContent = currentPlayer;
+                cell.classList.add(currentPlayer === 'X' ? 'x' : 'o');
+                
+                // Verifica vitória ou empate
+                checkResult();
+            }
+            
+            // Verifica o resultado do jogo
+            function checkResult() {
+                let roundWon = false;
+                
+                // Verifica combinações vencedoras
+                for (let i = 0; i < winningConditions.length; i++) {
+                    const [a, b, c] = winningConditions[i];
+                    
+                    if (board[a] === '' || board[b] === '' || board[c] === '') continue;
+                    
+                    if (board[a] === board[b] && board[b] === board[c]) {
+                        roundWon = true;
+                        break;
+                    }
+                }
+                
+                // Se houver vencedor
+                if (roundWon) {
+                    gameActive = false;
+                    const winner = currentPlayer === 'X' ? 'Eduardo' : 'Nicaele';
+                    gameMessage.innerHTML = `
+                        <div class="celebration">${winner === 'Eduardo' ? '❌' : '⭕'}</div>
+                        <h2>${winner} venceu!</h2>
+                    `;
+                    return;
+                }
+                
+                // Verifica empate
+                if (!board.includes('')) {
+                    gameActive = false;
+                    gameMessage.innerHTML = `
+                        <div class="celebration">🤝</div>
+                        <h2>Empate!</h2>
+                        <p>Nosso amor é equilibrado!</p>
+                    `;
+                    return;
+                }
+                
+                // Muda o jogador
+                currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+                updatePlayerDisplay();
+                gameMessage.textContent = `Vez da ${currentPlayer === 'X' ? 'Eduardo' : 'Nicaele'}!`;
+            }
+            
+            // Eventos dos botões
+            startEduardo.addEventListener('click', () => initGame('X'));
+            startNicaele.addEventListener('click', () => initGame('O'));
+            
+            restartButton.addEventListener('click', () => {
+                // Mostra a tela de início novamente
+                startScreen.style.display = 'block';
+                playersDisplay.style.display = 'none';
+                gameBoard.style.display = 'none';
+                actionButtons.style.display = 'none';
+                gameMessage.textContent = '';
+            });
+        });
+    </script>
+</body>
+</html>
