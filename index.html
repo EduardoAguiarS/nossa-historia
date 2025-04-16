@@ -234,6 +234,26 @@
             padding: 80px 0;
             text-align: center;
         }
+
+        .game-button {
+            display: block;
+            margin: 40px auto;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .game-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
         
         .love-letter {
             background: var(--light);
@@ -502,6 +522,10 @@
                 </div>
             </div>
         </div>
+
+        <button class="game-button" onclick="window.location.href='memory-game.html'">
+            Jogar Memória do Nosso Amor ♥
+        </button>
     </section>
     
     <section class="gallery-section">
