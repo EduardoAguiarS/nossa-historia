@@ -6,48 +6,77 @@
     <title>Memória do Nosso Amor | Nicaele & Eduardo</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #ff6b6b;
-            --secondary: #ffb8b8;
-            --dark: #333;
-            --light: #fff;
-            --accent: #ff9e9e;
+            --purple-dark: #6c5ce7;
+            --purple-light: #a29bfe;
+            --pink: #fd79a8;
+            --white: #fff;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
         
         body {
             font-family: 'Montserrat', sans-serif;
-            background-color: #fff9f9;
-            color: var(--dark);
+            background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), 
+                        url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
             margin: 0;
             padding: 0;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-image: url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
-            background-size: cover;
-            background-attachment: fixed;
-            background-position: center;
-            background-blend-mode: overlay;
-            background-color: rgba(255, 255, 255, 0.9);
         }
-
+        
         .game-container {
             max-width: 800px;
-            margin: 30px auto;
+            margin: 0 auto;
             padding: 20px;
             text-align: center;
         }
-
+        
         h1 {
             font-family: 'Dancing Script', cursive;
-            color: var(--primary);
+            color: var(--purple-dark);
             font-size: 3rem;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
-
+        
+        .players {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+        }
+        
+        .player {
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .player.active {
+            transform: scale(1.05);
+            box-shadow: var(--shadow);
+        }
+        
+        #player1 {
+            background-color: var(--purple-light);
+            color: white;
+        }
+        
+        #player2 {
+            background-color: var(--pink);
+            color: white;
+        }
+        
+        .scores {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
         .memory-game {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -55,10 +84,10 @@
             margin: 30px auto;
             max-width: 600px;
         }
-
+        
         .memory-card {
             height: 120px;
-            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            background: linear-gradient(135deg, var(--purple-light), var(--purple-dark));
             border-radius: 10px;
             display: flex;
             justify-content: center;
@@ -66,21 +95,21 @@
             font-size: 2rem;
             color: white;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
             transform-style: preserve-3d;
             position: relative;
         }
-
+        
         .memory-card.flipped {
             transform: rotateY(180deg);
             background: white;
         }
-
+        
         .memory-card.matched {
-            background: linear-gradient(135deg, #4caf50, #8bc34a);
+            background: linear-gradient(135deg, #00b894, #55efc4);
             cursor: default;
         }
-
+        
         .card-face {
             backface-visibility: hidden;
             position: absolute;
@@ -90,15 +119,20 @@
             justify-content: center;
             align-items: center;
         }
-
+        
         .card-front {
             transform: rotateY(180deg);
         }
-
+        
+        #game-message {
+            min-height: 80px;
+            margin: 20px 0;
+            font-size: 1.3rem;
+        }
+        
         .back-button {
-            margin-top: 30px;
-            padding: 12px 25px;
-            background: var(--primary);
+            padding: 12px 30px;
+            background: var(--purple-dark);
             color: white;
             border: none;
             border-radius: 50px;
@@ -106,17 +140,11 @@
             cursor: pointer;
             transition: all 0.3s;
         }
-
+        
         .back-button:hover {
             transform: scale(1.05);
         }
-
-        #game-message {
-            min-height: 60px;
-            margin-top: 20px;
-            font-size: 1.2rem;
-        }
-
+        
         @media (max-width: 768px) {
             .memory-game {
                 grid-template-columns: repeat(3, 1fr);
@@ -128,7 +156,11 @@
             }
             
             h1 {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
+            }
+            
+            .players {
+                gap: 15px;
             }
         }
     </style>
@@ -136,11 +168,19 @@
 <body>
     <div class="game-container">
         <h1>Memória do Nosso Amor</h1>
-        <p>Encontre os pares de momentos especiais!</p>
+        <p>Encontre os pares e veja quem sabe mais sobre nós!</p>
         
-        <div class="memory-game" id="memory-game">
-            <!-- Cartas serão adicionadas via JavaScript -->
+        <div class="players">
+            <div class="player active" id="player1">Jogador: Eduardo</div>
+            <div class="player" id="player2">Jogadora: Nicaele</div>
         </div>
+        
+        <div class="scores">
+            <div>Eduardo: <span id="score1">0</span> pontos</div>
+            <div>Nicaele: <span id="score2">0</span> pontos</div>
+        </div>
+        
+        <div class="memory-game" id="memory-game"></div>
         
         <div id="game-message"></div>
         <button class="back-button" onclick="window.location.href='index.html'">
@@ -150,26 +190,40 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Elementos do jogo
             const memoryGame = document.getElementById('memory-game');
             const gameMessage = document.getElementById('game-message');
+            const player1Display = document.getElementById('player1');
+            const player2Display = document.getElementById('player2');
+            const score1Display = document.getElementById('score1');
+            const score2Display = document.getElementById('score2');
             
-            // Símbolos personalizados (pode adicionar mais pares)
+            // Variáveis do jogo
+            let currentPlayer = 1; // 1 = Eduardo, 2 = Nicaele
+            let score1 = 0;
+            let score2 = 0;
+            let hasFlippedCard = false;
+            let lockBoard = false;
+            let firstCard, secondCard;
+            let matchedPairs = 0;
+            
+            // Símbolos românticos para o jogo
             const cardSymbols = [
                 '♥', '♥', '💑', '💑', '💍', '💍', 
                 '💌', '💌', '💕', '💕', '💘', '💘',
                 '🌹', '🌹', '👫', '👫', '🎂', '🎂'
             ];
             
-            let hasFlippedCard = false;
-            let lockBoard = false;
-            let firstCard, secondCard;
-            let matchedPairs = 0;
-            
             // Inicializa o jogo
             function initGame() {
                 matchedPairs = 0;
                 memoryGame.innerHTML = '';
                 gameMessage.textContent = '';
+                score1 = 0;
+                score2 = 0;
+                updateScores();
+                currentPlayer = 1;
+                updatePlayerDisplay();
                 
                 // Embaralha os símbolos
                 const shuffledSymbols = [...cardSymbols].sort(() => Math.random() - 0.5);
@@ -189,6 +243,25 @@
                     card.addEventListener('click', flipCard);
                     memoryGame.appendChild(card);
                 });
+            }
+            
+            // Atualiza a exibição de quem está jogando
+            function updatePlayerDisplay() {
+                if (currentPlayer === 1) {
+                    player1Display.classList.add('active');
+                    player2Display.classList.remove('active');
+                    gameMessage.textContent = "Vez do Eduardo!";
+                } else {
+                    player1Display.classList.remove('active');
+                    player2Display.classList.add('active');
+                    gameMessage.textContent = "Vez da Nicaele!";
+                }
+            }
+            
+            // Atualiza os placares
+            function updateScores() {
+                score1Display.textContent = score1;
+                score2Display.textContent = score2;
             }
             
             // Vira a carta
@@ -216,20 +289,59 @@
                 const isMatch = firstCard.dataset.symbol === secondCard.dataset.symbol;
                 
                 if (isMatch) {
+                    // Pontua para o jogador atual
+                    if (currentPlayer === 1) {
+                        score1++;
+                    } else {
+                        score2++;
+                    }
+                    
+                    updateScores();
                     disableCards();
                     matchedPairs++;
                     
                     // Verifica se o jogo acabou
                     if (matchedPairs === cardSymbols.length / 2) {
-                        gameMessage.innerHTML = `
-                            <h3 style="color: var(--primary);">Parabéns, meu amor! 💖</h3>
-                            <p>Você completou o jogo da nossa memória!</p>
-                            <p>Te amo mais que ontem, menos que amanhã.</p>
-                        `;
+                        endGame();
+                    } else {
+                        gameMessage.textContent = currentPlayer === 1 ? 
+                            "Eduardo acertou! Jogue novamente." : 
+                            "Nicaele acertou! Jogue novamente.";
                     }
                 } else {
+                    // Muda o jogador se errar
+                    gameMessage.textContent = currentPlayer === 1 ? 
+                        "Eduardo errou, vez da Nicaele!" : 
+                        "Nicaele errou, vez do Eduardo!";
+                    
+                    currentPlayer = currentPlayer === 1 ? 2 : 1;
+                    updatePlayerDisplay();
                     unflipCards();
                 }
+            }
+            
+            // Finaliza o jogo
+            function endGame() {
+                let winnerMessage;
+                
+                if (score1 > score2) {
+                    winnerMessage = `
+                        <h2>Eduardo venceu com ${score1} pontos! 🎉</h2>
+                        <p>Nicaele, você precisa prestar mais atenção no nosso amor!</p>
+                    `;
+                } else if (score2 > score1) {
+                    winnerMessage = `
+                        <h2>Nicaele venceu com ${score2} pontos! 💖</h2>
+                        <p>Eduardo, precisa se esforçar mais para lembrar dos nossos momentos!</p>
+                    `;
+                } else {
+                    winnerMessage = `
+                        <h2>Empate! ${score1} a ${score2} 🤝</h2>
+                        <p>Vocês dois sabem igualmente bem sobre o amor de vocês!</p>
+                    `;
+                }
+                
+                gameMessage.innerHTML = winnerMessage;
             }
             
             // Desativa as cartas combinadas
