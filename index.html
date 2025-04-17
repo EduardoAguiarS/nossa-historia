@@ -402,6 +402,79 @@
             color: var(--primary);
         }
         
+        /* Surprise Proposal Styles */
+        .proposal-surprise {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            color: white;
+        }
+        
+        .proposal-surprise.active {
+            display: flex;
+        }
+        
+        .proposal-content {
+            max-width: 800px;
+            padding: 40px;
+            position: relative;
+            animation: fadeIn 1.5s;
+        }
+        
+        .proposal-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .proposal-text {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+        
+        .proposal-date {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin: 20px 0;
+        }
+        
+        .proposal-button {
+            padding: 15px 30px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            margin: 10px;
+        }
+        
+        .proposal-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .proposal-image {
+            max-width: 300px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
         @keyframes float {
             0% {
                 transform: translateY(100vh) rotate(0deg);
@@ -417,6 +490,11 @@
                 transform: translateY(-100px) rotate(360deg);
                 opacity: 0;
             }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         @media (max-width: 768px) {
@@ -451,15 +529,22 @@
                 top: 10px;
                 right: 15px;
             }
+            
+            .proposal-title {
+                font-size: 2.5rem;
+            }
+            
+            .proposal-text {
+                font-size: 1.1rem;
+            }
+            
+            .proposal-date {
+                font-size: 1.2rem;
+            }
         }
     </style>
 </head>
 <body>
-  <!-- <audio autoplay loop>
-    <source src="chemicalsdirect.co.za - Luan Santana - CERTEZA (Ao Vivo na Lua) (320 KBps).mp3" type="audio/mpeg">
-    Seu navegador não suporta o elemento de áudio.
-  </audio> -->
-
     <div class="floating-hearts" id="hearts-container"></div>
     
     <!-- Lightbox -->
@@ -470,6 +555,30 @@
             <img class="lightbox-img" id="lightbox-img" src="" alt="">
             <span class="next" id="next">&#10095;</span>
             <div class="lightbox-caption" id="lightbox-caption"></div>
+        </div>
+    </div>
+    
+    <!-- Surprise Proposal -->
+    <div class="proposal-surprise" id="proposal-surprise">
+        <div class="proposal-content">
+            <h2 class="proposal-title">Nicaele, meu amor</h2>
+            <img src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Santuário de Aparecida" class="proposal-image">
+            <p class="proposal-text">
+                Você é a pessoa mais especial da minha vida e não vejo a hora de passar o resto dos meus dias ao seu lado.<br>
+                Por isso, quero te convidar para um momento único e especial:
+            </p>
+            <div class="proposal-date">
+                <strong>10 de Maio de 2025</strong><br>
+                Santuário Nacional de Aparecida
+            </div>
+            <p class="proposal-text">
+                Nesse dia, diante de Nossa Senhora Aparecida, eu gostaria de fazer um pedido muito importante para você.<br>
+                Espero que você aceite esse convite e esteja comigo nesse momento tão especial!
+            </p>
+            <div>
+                <button class="proposal-button" id="accept-proposal">Aceito com todo meu coração ❤️</button>
+                <button class="proposal-button" id="see-more" style="background: linear-gradient(135deg, #6c5ce7, #a29bfe)">Quero saber mais detalhes</button>
+            </div>
         </div>
     </div>
     
@@ -514,6 +623,11 @@
                 <div class="date-card">
                     <div class="date-title">Pedido de Namoro</div>
                     <div class="date">5 de Março 2025</div>
+                </div>
+                <div class="date-card">
+                    <div class="date-title">Pedido de Casamento</div>
+                    <div class="date">10 de Maio 2025</div>
+                    <div class="date" id="proposal-countdown"></div>
                 </div>
                 <div class="date-card">
                     <div class="date-title">Nosso Casamento</div>
@@ -581,7 +695,7 @@
                 
                 <p>Lembro de cada detalhe do nosso primeiro encontro em 27 de fevereiro, da ansiedade antes de te pedir em namoro no dia 5 de março, e de todos os momentos especiais que vivemos desde então. Você transformou meus dias com seu sorriso, meu mundo com seu amor e meu coração com sua bondade.</p>
                 
-                <p>Mal posso esperar pelo dia 21 de novembro de 2026, quando poderemos dizer "sim" um para o outro diante de Deus e de todos que amamos. Até lá e por toda a eternidade, saiba que meu amor por você só cresce a cada dia.</p>
+                <p>Mal posso esperar pelo dia 10 de maio de 2025, quando poderemos viver um momento mágico juntos no Santuário de Aparecida, e depois pelo dia 21 de novembro de 2026, quando poderemos dizer "sim" um para o outro diante de Deus e de todos que amamos. Até lá e por toda a eternidade, saiba que meu amor por você só cresce a cada dia.</p>
                 
                 <p>Obrigado por ser minha companheira, minha melhor amiga e o amor da minha vida.</p>
                 
@@ -601,7 +715,45 @@
         // Configuração das datas importantes
         const firstMeetDate = new Date('2025-02-27');
         const relationshipDate = new Date('2025-03-05');
+        const proposalDate = new Date('2025-05-10');
         const weddingDate = new Date('2026-11-21');
+        
+        // Verifica se é dia do pedido de casamento ou depois
+        function checkProposalDate() {
+            const now = new Date();
+            if (now >= proposalDate) {
+                // Se já passou da data do pedido, mostra a surpresa
+                showProposalSurprise();
+            } else {
+                // Se ainda não chegou, mostra um alerta no dia 10 de maio
+                const timeToProposal = proposalDate - now;
+                const daysToProposal = Math.floor(timeToProposal / (1000 * 60 * 60 * 24));
+                
+                if (daysToProposal === 0) {
+                    // É dia 10 de maio!
+                    showProposalSurprise();
+                }
+            }
+        }
+        
+        // Mostra a surpresa do pedido de casamento
+        function showProposalSurprise() {
+            const proposal = document.getElementById('proposal-surprise');
+            proposal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            // Cria muitos corações para celebrar
+            for (let i = 0; i < 50; i++) {
+                createHearts();
+            }
+        }
+        
+        // Esconde a surpresa do pedido de casamento
+        function hideProposalSurprise() {
+            const proposal = document.getElementById('proposal-surprise');
+            proposal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
         
         // Atualiza o contador de tempo juntos
         function updateCounters() {
@@ -619,6 +771,15 @@
             document.getElementById('hours-together').textContent = hours;
             document.getElementById('minutes-together').textContent = minutes;
             document.getElementById('seconds-together').textContent = seconds;
+            
+            // Contagem regressiva para o pedido de casamento
+            const timeToProposal = proposalDate - now;
+            if (timeToProposal > 0) {
+                const proposalDays = Math.floor(timeToProposal / (1000 * 60 * 60 * 24));
+                document.getElementById('proposal-countdown').textContent = `Faltam ${proposalDays} dias`;
+            } else {
+                document.getElementById('proposal-countdown').textContent = `Dia Especial!`;
+            }
             
             // Contagem regressiva para o casamento
             const timeToWedding = weddingDate - now;
@@ -659,6 +820,9 @@
         
         // Cria corações periodicamente
         setInterval(createHearts, 300);
+        
+        // Verifica se é dia do pedido de casamento
+        checkProposalDate();
         
         // Lightbox functionality
         const lightbox = document.getElementById('lightbox');
@@ -731,6 +895,17 @@
             lightboxImg.src = currentImage.src;
             lightboxCaption.textContent = currentImage.getAttribute('data-caption') || currentImage.alt;
         }
+        
+        // Proposal surprise buttons
+        document.getElementById('accept-proposal').addEventListener('click', () => {
+            alert('Eu te amo mais que tudo neste mundo! ❤️ Vamos viver esse momento mágico juntos!');
+            hideProposalSurprise();
+        });
+        
+        document.getElementById('see-more').addEventListener('click', () => {
+            alert('Vamos passar o dia em Aparecida do Norte. Prepare-se para uma surpresa especial às 16h no Santuário Nacional! ❤️');
+            hideProposalSurprise();
+        });
     </script>
 </body>
 </html>
