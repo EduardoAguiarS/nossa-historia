@@ -245,13 +245,3 @@ function updateProposalCountdown() {
         }
     }
 }
-
-// Adicionar imagem de Nossa Senhora Aparecida na seção de mensagem
-const loveLetter = document.querySelector('.love-letter');
-const maryElement = document.createElement('div');
-maryElement.className = 'mary-image';
-maryElement.innerHTML = `
-    <img src="https://i.pinimg.com/originals/e5/5e/5a/e55e5a6fdfa28d8b18b3542c6ff70c60.png" alt="Nossa Senhora Aparecida" style="width: 100px; filter: drop-shadow(0 0 10px rgba(255, 107, 107, 0.5));">
-    <p style="font-size: 0.9rem; margin-top: 10px;">Que Nossa Senhora Aparecida abençoe nosso amor</p>
-`;
-loveLetter.insertBefore(maryElement, loveLetter.querySelector('.signature'));

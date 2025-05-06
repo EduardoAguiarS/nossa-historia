@@ -17,130 +17,13 @@ body {
   background-color: #fff9f9;
   color: var(--dark);
   line-height: 1.6;
+  overflow-x: hidden;
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
-}
-
-/* Estilos para o modal de boas-vindas */
-.welcome-modal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.9);
-  z-index: 3000;
-  justify-content: center;
-  align-items: center;
-  font-family: 'Playfair Display', serif;
-}
-
-.welcome-modal.active {
-  display: flex;
-}
-
-.welcome-content {
-  background: #fff9f9;
-  padding: 40px;
-  border-radius: 15px;
-  max-width: 600px;
-  text-align: center;
-  position: relative;
-  box-shadow: 0 0 30px rgba(255, 107, 107, 0.3);
-  animation: fadeInUp 0.8s;
-}
-
-.welcome-content h2 {
-  color: var(--primary);
-  font-family: 'Dancing Script', cursive;
-  font-size: 3rem;
-  margin-bottom: 20px;
-}
-
-.close-welcome {
-  position: absolute;
-  top: 15px;
-  right: 25px;
-  color: var(--dark);
-  font-size: 30px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.close-welcome:hover {
-  color: var(--primary);
-}
-
-.proposal-message {
-  font-size: 1.2rem;
-  line-height: 1.8;
-  margin: 20px 0;
-  color: var(--dark);
-}
-
-.proposal-message span {
-  color: var(--primary);
-  font-weight: bold;
-}
-
-.mary-image {
-  margin: 20px 0;
-  animation: floatMary 6s ease-in-out infinite;
-}
-
-.countdown-container {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin: 30px 0;
-}
-
-.countdown-box {
-  background: linear-gradient(135deg, var(--primary), var(--accent));
-  color: white;
-  padding: 15px;
-  border-radius: 10px;
-  min-width: 80px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-.countdown-number {
-  font-size: 2rem;
-  font-weight: bold;
-}
-
-.countdown-label {
-  font-size: 0.9rem;
-  margin-top: 5px;
-}
-
-/* Animações */
-@keyframes fadeInUp {
-  from {
-      opacity: 0;
-      transform: translateY(50px);
-  }
-  to {
-      opacity: 1;
-      transform: translateY(0);
-  }
-}
-
-@keyframes floatMary {
-  0% {
-      transform: translateY(0px);
-  }
-  50% {
-      transform: translateY(-15px);
-  }
-  100% {
-      transform: translateY(0px);
-  }
 }
 
 header {
@@ -208,6 +91,7 @@ h3 {
   100% { transform: scale(1); }
 }
 
+/* Seção da Linha do Tempo */
 .timeline-section {
   padding: 80px 0;
   text-align: center;
@@ -275,6 +159,18 @@ h3 {
   background: linear-gradient(90deg, var(--primary), var(--accent));
 }
 
+.date-card::before {
+  content: "";
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, var(--secondary) 0%, transparent 70%);
+  opacity: 0.3;
+  z-index: 0;
+}
+
 .date-title {
   font-weight: 600;
   margin-bottom: 10px;
@@ -285,6 +181,13 @@ h3 {
   font-size: 1.1rem;
 }
 
+.mary-icon {
+  font-size: 2rem;
+  margin: 10px 0;
+  animation: pulse 2s infinite;
+}
+
+/* Galeria de Fotos */
 .gallery-section {
   padding: 80px 0;
   background-color: #fef5f5;
@@ -338,29 +241,10 @@ h3 {
   transform: translateY(0);
 }
 
+/* Carta de Amor */
 .message-section {
   padding: 80px 0;
   text-align: center;
-}
-
-.game-button {
-  display: block;
-  margin: 40px auto;
-  padding: 15px 30px;
-  background: linear-gradient(135deg, var(--primary), var(--accent));
-  color: white;
-  border: none;
-  border-radius: 50px;
-  font-size: 1.2rem;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease;
-}
-
-.game-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
 .love-letter {
@@ -405,6 +289,43 @@ h3 {
   margin-top: 30px;
 }
 
+.mary-image {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.mary-image img {
+  width: 100px;
+  filter: drop-shadow(0 0 10px rgba(255, 107, 107, 0.5));
+}
+
+.mary-image p {
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
+
+/* Botões */
+.game-button {
+  display: block;
+  margin: 40px auto;
+  padding: 15px 30px;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.game-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Rodapé */
 footer {
   background: var(--dark);
   color: var(--light);
@@ -413,6 +334,7 @@ footer {
   font-size: 0.9rem;
 }
 
+/* Corações Flutuantes */
 .floating-hearts {
   position: fixed;
   top: 0;
@@ -431,7 +353,7 @@ footer {
   animation: float 10s linear infinite;
 }
 
-/* Lightbox Styles */
+/* Lightbox */
 .lightbox {
   display: none;
   position: fixed;
@@ -510,7 +432,7 @@ footer {
   color: var(--primary);
 }
 
-/* Surprise Proposal Styles */
+/* Modal de Pedido de Casamento */
 .proposal-surprise {
   display: none;
   position: fixed;
@@ -583,6 +505,125 @@ footer {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
+/* Modal de Boas-Vindas */
+.welcome-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 3000;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Playfair Display', serif;
+}
+
+.welcome-modal.active {
+  display: flex;
+}
+
+.welcome-content {
+  background: #fff9f9;
+  padding: 40px;
+  border-radius: 15px;
+  max-width: 600px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 0 30px rgba(255, 107, 107, 0.3);
+  animation: fadeInUp 0.8s;
+  max-height: 90vh;
+  overflow-y: auto;
+  margin: 20px 0;
+}
+
+.welcome-content h2 {
+  color: var(--primary);
+  font-family: 'Dancing Script', cursive;
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.close-welcome {
+  position: absolute;
+  top: 15px;
+  right: 25px;
+  color: var(--dark);
+  font-size: 30px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.close-welcome:hover {
+  color: var(--primary);
+}
+
+.proposal-message {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  margin: 20px 0;
+  color: var(--dark);
+}
+
+.proposal-message span {
+  color: var(--primary);
+  font-weight: bold;
+}
+
+.mary-image {
+  margin: 20px 0;
+  animation: floatMary 6s ease-in-out infinite;
+}
+
+.countdown-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 30px 0;
+}
+
+.countdown-box {
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: white;
+  padding: 15px;
+  border-radius: 10px;
+  min-width: 80px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.countdown-number {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.countdown-label {
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
+/* Botão Flutuante para Mobile */
+.floating-proposal-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: white;
+  border: none;
+  font-size: 1.5rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pulse 2s infinite;
+}
+
+/* Animações */
 @keyframes float {
   0% {
       transform: translateY(100vh) rotate(0deg);
@@ -605,7 +646,32 @@ footer {
   to { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes fadeInUp {
+  from {
+      opacity: 0;
+      transform: translateY(50px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+@keyframes floatMary {
+  0% {
+      transform: translateY(0px);
+  }
+  50% {
+      transform: translateY(-15px);
+  }
+  100% {
+      transform: translateY(0px);
+  }
+}
+
+/* Responsividade */
 @media (max-width: 768px) {
+  /* Ajustes gerais */
   h1 {
       font-size: 3rem;
   }
@@ -615,38 +681,121 @@ footer {
   }
   
   .counter-box {
-      width: 150px;
-      padding: 20px;
+      width: 45%;
+      padding: 20px 10px;
   }
   
-  .counter-number {
-      font-size: 2rem;
+  .date-card {
+      width: 100%;
+      margin-bottom: 15px;
   }
   
-  .lightbox-img {
-      max-height: 60vh;
+  .love-letter {
+      padding: 30px 20px;
   }
   
-  .prev, .next {
-      font-size: 24px;
+  .love-letter p {
+      font-size: 1rem;
+  }
+  
+  .game-button {
+      width: 90%;
+      padding: 12px;
+      font-size: 1rem;
+  }
+  
+  /* Ajustes para o modal */
+  .welcome-content {
+      width: 90%;
+      padding: 30px 20px;
+  }
+  
+  .welcome-content h2 {
+      font-size: 2.2rem;
+  }
+  
+  .proposal-message {
+      font-size: 1rem;
+  }
+  
+  .countdown-container {
+      flex-wrap: wrap;
+      gap: 10px;
+  }
+  
+  .countdown-box {
+      min-width: 70px;
       padding: 10px;
   }
   
-  .close-lightbox {
-      font-size: 30px;
-      top: 10px;
-      right: 15px;
+  .countdown-number {
+      font-size: 1.5rem;
   }
   
-  .proposal-title {
-      font-size: 2.5rem;
+  .mary-image img {
+      width: 100px;
   }
   
-  .proposal-text {
-      font-size: 1.1rem;
+  /* Galeria */
+  .gallery {
+      grid-template-columns: repeat(2, 1fr);
   }
   
-  .proposal-date {
-      font-size: 1.2rem;
+  .gallery-item {
+      height: 180px;
+  }
+  
+  .gallery-caption {
+      padding: 10px;
+      font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Ajustes finos para telas muito pequenas */
+  h1 {
+      font-size: 2.2rem;
+  }
+  
+  header {
+      padding: 40px 0;
+  }
+  
+  .counter-box {
+      width: 100%;
+  }
+  
+  .welcome-content h2 {
+      font-size: 1.8rem;
+  }
+  
+  .countdown-box {
+      min-width: 60px;
+  }
+  
+  .countdown-number {
+      font-size: 1.3rem;
+  }
+  
+  .mary-image img {
+      width: 80px;
+  }
+  
+  .gallery {
+      grid-template-columns: 1fr;
+  }
+  
+  .love-letter::before, 
+  .love-letter::after {
+      font-size: 3rem;
+  }
+  
+  /* Remove animações em mobile para performance */
+  .mary-image {
+      animation: none;
+  }
+  
+  @keyframes floatMary {
+      0%, 100% { transform: translateY(0); }
   }
 }

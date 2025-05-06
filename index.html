@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Nicaele & Eduardo - Nossa História</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -10,14 +10,15 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Adicione isso antes do fechamento do body -->
-    <!-- Modal de Abertura -->
+    <div class="floating-hearts" id="hearts-container"></div>
+    
+    <!-- Modal de Boas-Vindas -->
     <div class="welcome-modal" id="welcome-modal">
         <div class="welcome-content">
             <span class="close-welcome">&times;</span>
             <h2>Meu Amor Nicaele</h2>
             <div class="mary-image">
-                <img src="https://i.pinimg.com/originals/e5/5e/5a/e55e5a6fdfa28d8b18b3542c6ff70c60.png" alt="Nossa Senhora Aparecida" style="width: 150px; filter: drop-shadow(0 0 10px rgba(255, 107, 107, 0.5));">
+                <img src="https://i.pinimg.com/originals/e5/5e/5a/e55e5a6fdfa28d8b18b3542c6ff70c60.png" alt="Nossa Senhora Aparecida">
             </div>
             <p class="proposal-message">
                 Se você pudesse se ver através dos meus olhos, entenderia o brilho incrível que emana do seu ser...<br><br>
@@ -45,10 +46,8 @@
             <button class="proposal-button" id="continue-to-site">Continuar para Nosso Site</button>
         </div>
     </div>
-
-    <div class="floating-hearts" id="hearts-container"></div>
     
-    <!-- Lightbox -->
+    <!-- Lightbox (Galeria de Fotos) -->
     <div class="lightbox" id="lightbox">
         <span class="close-lightbox">&times;</span>
         <div class="lightbox-content">
@@ -59,7 +58,7 @@
         </div>
     </div>
     
-    <!-- Surprise Proposal -->
+    <!-- Surpresa do Pedido -->
     <div class="proposal-surprise" id="proposal-surprise">
         <div class="proposal-content">
             <h2 class="proposal-title">Nicaele, meu amor</h2>
@@ -83,6 +82,7 @@
         </div>
     </div>
     
+    <!-- Cabeçalho -->
     <header>
         <div class="container">
             <h1>Nicaele <span class="heart">♥</span> Eduardo</h1>
@@ -91,6 +91,7 @@
         </div>
     </header>
     
+    <!-- Linha do Tempo -->
     <section class="timeline-section">
         <div class="container">
             <h2>Nosso Tempo Juntos</h2>
@@ -128,6 +129,7 @@
                 <div class="date-card">
                     <div class="date-title">Pedido de Casamento</div>
                     <div class="date">10 de Maio 2025</div>
+                    <div class="mary-icon">🙏</div>
                     <div class="date" id="proposal-countdown"></div>
                 </div>
                 <div class="date-card">
@@ -143,10 +145,11 @@
         </button>
         <button class="game-button" onclick="window.location.href='jogo-da-velha.html'" 
         style="background: linear-gradient(135deg, #fd79a8, #e84393)">
-    Jogo da Velha do Amor ❌⭕
+            Jogo da Velha do Amor ❌⭕
         </button>
     </section>
     
+    <!-- Galeria de Fotos -->
     <section class="gallery-section">
         <div class="container">
             <h2>Nossas Lembranças</h2>
@@ -185,6 +188,7 @@
         </div>
     </section>
     
+    <!-- Carta de Amor -->
     <section class="message-section">
         <div class="container">
             <h2>Para Você, Meu Amor</h2>
@@ -196,15 +200,23 @@
                 
                 <p>Lembro de cada detalhe do nosso primeiro encontro em 27 de fevereiro, da ansiedade antes de te pedir em namoro no dia 5 de março, e de todos os momentos especiais que vivemos desde então. Você transformou meus dias com seu sorriso, meu mundo com seu amor e meu coração com sua bondade.</p>
                 
+                <p>Que Nossa Senhora Aparecida, padroeira do nosso amor, nos guie e proteja em cada passo dessa jornada. Assim como Ela une os corações dos devotos, uniu os nossos para sempre.</p>
+                
                 <p>Mal posso esperar pelo dia 10 de maio de 2025, quando poderemos viver um momento mágico juntos no Santuário de Aparecida, e depois pelo dia 21 de novembro de 2026, quando poderemos dizer "sim" um para o outro diante de Deus e de todos que amamos. Até lá e por toda a eternidade, saiba que meu amor por você só cresce a cada dia.</p>
                 
                 <p>Obrigado por ser minha companheira, minha melhor amiga e o amor da minha vida.</p>
+                
+                <div class="mary-image">
+                    <img src="https://i.pinimg.com/originals/e5/5e/5a/e55e5a6fdfa28d8b18b3542c6ff70c60.png" alt="Nossa Senhora Aparecida">
+                    <p>Que Nossa Senhora Aparecida abençoe nosso amor</p>
+                </div>
                 
                 <div class="signature">Com todo meu amor, Eduardo</div>
             </div>
         </div>
     </section>
     
+    <!-- Rodapé -->
     <footer>
         <div class="container">
             <p>Nicaele & Eduardo - Uma história escrita pelas mãos do destino</p>
